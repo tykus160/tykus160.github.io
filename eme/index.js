@@ -17,20 +17,21 @@ const SYSTEMS = [
 
 
 /**
- * @param {string} systemName
- * @param {boolean=} hwProtection
- * @returns {string}
+ * @type {!Object<string, !Array<string>>}
  */
-const getRobustness = (systemName, hwProtection = false) => {
-  let robustness = '';
-
-  if (systemName == 'com.microsoft.playready.recommendation') {
-    robustness = hwProtection ? '3000' : '2000';
-  } else if (systemName == 'com.widevine.alpha') {
-    robustness = hwProtection ? 'HW_SECURE_DECODE' : 'SW_SECURE_DECODE';
-  }
-
-  return robustness;
+const ROBUSTNESS = {
+  'com.widevine.alpha': [
+    'SW_SECURE_CRYPTO',
+    'SW_SECURE_DECODE',
+    'HW_SECURE_CRYPTO',
+    'HW_SECURE_DECODE',
+    'HW_SECURE_ALL',
+  ],
+  'com.microsoft.playready.recommendation': [
+    '150',
+    '2000',
+    '3000',
+  ],
 };
 
 
@@ -41,7 +42,6 @@ const probeSupport = async () => {
   const requests = [];
   for (let i = 0; i < SYSTEMS.length; ++i) {
     const keySystem = document.getElementById(`keysystem${i}`).value;
-    console.log(keySystem);
     const audioCaps = document.getElementById(`audiocaps${i}`).value;
     const videoCaps = document.getElementById(`videocaps${i}`).value;
     const robustness = document.getElementById(`robustness${i}`).value;
@@ -90,7 +90,7 @@ const clearResults = () => {
 /**
  * @param {!Element} row
  * @param {string} id
- * @param {string|boolean} value
+ * @param {string|boolean|!Array<string>} value
  * @param {boolean=} disabled
  * @returns {void}
  */
@@ -103,6 +103,18 @@ const clearResults = () => {
   } else if (typeof value == 'boolean') {
     input.type = 'checkbox';
     input.checked = value;
+  } else if (Array.isArray(value)) {
+    input.type = 'text';
+    const dataList = document.createElement('datalist');
+    dataList.id = `${id}_datalist`;
+
+    for (const option of value) {
+      const dataOption = document.createElement('option');
+      dataOption.value = option;
+      dataList.appendChild(dataOption);
+    }
+    document.body.appendChild(dataList);
+    input.setAttribute('list', dataList.id);
   }
   input.disabled = disabled;
 
@@ -119,9 +131,9 @@ window.addEventListener('load', () => {
     addCol(row, `keysystem${i}`, keySystem);
     addCol(row, `audiocaps${i}`, 'audio/mp4; codecs="mp4a.40.2"');
     addCol(row, `videocaps${i}`, 'video/mp4; codecs="avc1.42E01E"');
-    addCol(row, `robustness${i}`, getRobustness(keySystem));
+    addCol(row, `robustness${i}`, ROBUSTNESS[keySystem] || '');
     addCol(row, `persistent${i}`, false);
     addCol(row, `result${i}`, '', true);
     table.appendChild(row);
   });
-});
+}, { once: true });
