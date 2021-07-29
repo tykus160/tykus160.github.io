@@ -1,0 +1,24 @@
+table {
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+tr {
+  padding: 0.5em;
+  border: 1px solid #ddd;
+}
+
+th {
+  padding: 1em;
+  border: 1px solid #ddd;
+  background-color: #346a92;
+  color: #fff;
+}
+
+.pass {
+  color: green;
+}
+
+.fail {
+  color: red;
+}
