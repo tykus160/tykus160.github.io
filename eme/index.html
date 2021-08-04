@@ -12,22 +12,21 @@
     </header>
     <p>
       Form of a request:
+      <pre>navigator.requestMediaKeySystemAccess(<strong>keySystem</strong>, [{
+  initDataTypes: ['cenc'],
+  persistentState: <strong>persistent</strong> ? 'required' : 'optional',
+  sessionTypes: [<strong>persistent</strong> ? 'persistent-license' : 'temporary'],
+  videoCapabilities: [{
+    contentType: <strong>videoCaps</strong>,
+    robustness: <strong>robustness</strong>,
+  }],
+  audioCapabilities: [{
+    contentType: <strong>audioCaps</strong>,
+    robustness: '',
+  }],
+}]);</pre>
     </p>
-    <pre>
-      navigator.requestMediaKeySystemAccess(<strong>keySystem</strong>, [{
-        initDataTypes: ['cenc'],
-        persistentState: <strong>persistent</strong> ? 'required' : 'optional',
-        sessionTypes: [<strong>persistent</strong> ? 'persistent-license' : 'temporary'],
-        videoCapabilities: [{
-          contentType: <strong>videoCaps</strong>,
-          robustness: <strong>robustness</strong>,
-        }],
-        audioCapabilities: [{
-          contentType: <strong>audioCaps</strong>,
-          robustness: '',
-        }],
-      }]);
-    </pre>
+
     <p>
       <button onclick="probeSupport()">Submit</button>
       <button onclick="clearResults()">Clear</button>
