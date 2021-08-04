@@ -1,11 +1,35 @@
+body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+pre {
+  padding: 1em;
+  width: fit-content;
+  background-color: #efefef;
+  border-radius: 10px;
+}
+
+button {
+  padding: .25rem .5rem;
+  color: #fff;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: .2rem;
+  cursor: pointer;
+  font-size: .875rem;
+  line-height: 1.5;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 1;
+}
+
 table {
   width: 100%;
   border: 1px solid #ddd;
-}
-
-tr {
-  padding: 0.5em;
-  border: 1px solid #ddd;
+  background-color: #efefef;
 }
 
 th {
@@ -13,6 +37,22 @@ th {
   border: 1px solid #ddd;
   background-color: #346a92;
   color: #fff;
+}
+
+tr {
+  padding: .5em;
+  border: 1px solid #ddd;
+}
+
+td {
+  padding: .5em;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+input {
+  width: 90%;
+  padding: 1px 2px;
 }
 
 .pass {
