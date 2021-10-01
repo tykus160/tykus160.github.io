@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Persistent license check</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <header>
+      <h1>Persistent license check</h1>
+    </header>
+    <p>
+      This site is an extension of <a href="../index.html">EME test page</a> for persistent
+      license checks. As not all EME implementations correctly follow spec,
+      sometimes <code>navigator.requestMediaKeySystemAccess()</code> might claim
+      it supports persistent license, but eventually fail during session
+      creation.
+    </p>
+    <p>
+      <label for="keysystem">Choose Key System:</label>
+      <select id="keysystem" required>
+        <option value="org.w3.clearkey">ClearKey</option>
+        <option value="com.widevine.alpha">Widevine</option>
+        <option value="com.microsoft.playready">PlayReady</option>
+        <option value="com.microsoft.playready.recommendation">PlayReady recommendation</option>
+        <option value="com.apple.fps">FairPlay</option>
+        <option value="com.apple.fps.1_0">FairPlay v1</option>
+        <option value="com.apple.fps.2_0">FairPlay v2</option>
+        <option value="com.apple.fps.3_0">FairPlay v3</option>
+      </select>
+      <button onclick="createPersistentSession()">Submit</button><br>
+      <label for="result">Result:</label>
+      <input type="text" id="result" disabled></input>
+    </p>
+    <footer>
+      <p>Wojciech Tyczyński 2021</p>
+    </footer>
+    <script src="index.js"></script>
+  </body>
+</html>
